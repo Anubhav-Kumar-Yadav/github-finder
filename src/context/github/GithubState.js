@@ -49,12 +49,7 @@ const GithubState = (props) => {
 
   const fetchGithubUserProfile = async (username) => {
     dispatch({ type: SET_LOADING });
-
-    console.log(username);
-
     const res = await axios.get(`https://api.github.com/users/${username}`);
-
-    console.log(res);
     dispatch({ type: SET_USER, payload: res.data });
   };
 
