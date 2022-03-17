@@ -1,15 +1,9 @@
-import {
-  SET_USERS,
-  CLEAR_USERS,
-  SET_LOADING,
-  SET_USER,
-  CLEAR_USER,
-} from "../types";
+import { SET_USERS, CLEAR_USERS, SET_LOADING, SET_USER } from "../types";
 
 const GithubReducer = (state, action) => {
   switch (action.type) {
     case SET_USERS: {
-      return { ...state, users: action.payload, loading: false };
+      return { ...state, users: action.payload };
     }
 
     case CLEAR_USERS: {
@@ -17,15 +11,11 @@ const GithubReducer = (state, action) => {
     }
 
     case SET_LOADING: {
-      return { ...state, loading: true };
+      return { ...state, loading: action.payload };
     }
 
     case SET_USER: {
-      return { ...state, user: action.payload, loading: false };
-    }
-
-    case CLEAR_USER: {
-      return { ...state, user: null };
+      return { ...state, user: action.payload };
     }
 
     default:

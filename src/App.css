@@ -49,7 +49,8 @@
   color: var(--light);
 }
 
-.container {
+.container,
+.user {
   width: 90%;
   margin: 1rem auto;
 }
@@ -113,4 +114,9 @@
   margin-bottom: 0.5rem;
   font-size: 1rem;
   border: none;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }

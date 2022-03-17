@@ -2,9 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import GithubContext from "../../context/github/GithubContext";
+import Spinner from "../layout/Spinner";
 
 const User = () => {
-  const { fetchGithubUserProfile } = useContext(GithubContext);
+  const { fetchGithubUserProfile, user, loading } = useContext(GithubContext);
   const { username } = useParams();
 
   useEffect(() => {
@@ -12,7 +13,15 @@ const User = () => {
     // eslint-disable-next-line
   }, []);
 
-  return <div>User</div>;
+  if (loading) return <Spinner />;
+  else {
+    return (
+      <div className="user">
+        <button>Go Back</button>
+        <section className="about">{user.login}</section>
+      </div>
+    );
+  }
 };
 
 export default User;
