@@ -1,24 +1,33 @@
 import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import GithubContext from "../../context/github/GithubContext";
 import Spinner from "../layout/Spinner";
+import UserInfo from "./UserInfo";
+import UserRepos from "./UserRepos";
 
 const User = () => {
-  const { fetchGithubUserProfile, user, loading } = useContext(GithubContext);
+  const navigate = useNavigate();
   const { username } = useParams();
+
+  const { fetchGithubUserProfile, loading } = useContext(GithubContext);
 
   useEffect(() => {
     fetchGithubUserProfile(username);
     // eslint-disable-next-line
   }, []);
 
+  const onClick = () => navigate("/");
+
   if (loading) return <Spinner />;
   else {
     return (
       <div className="user">
-        <button>Go Back</button>
-        <section className="about">{user.login}</section>
+        <button className="btn light" onClick={onClick}>
+          Go Back
+        </button>
+        <UserInfo />
+        <UserRepos />
       </div>
     );
   }

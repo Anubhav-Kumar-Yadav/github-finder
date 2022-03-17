@@ -1,7 +1,13 @@
 import React, { useReducer } from "react";
 import axios from "axios";
 
-import { SET_USERS, CLEAR_USERS, SET_LOADING, SET_USER } from "../types";
+import {
+  SET_USERS,
+  CLEAR_USERS,
+  SET_LOADING,
+  SET_USER,
+  SET_USER_REPOS,
+} from "../types";
 
 import GithubReducer from "./GithubReducer";
 import GithubContext from "./GithubContext";
@@ -11,6 +17,7 @@ const GithubState = (props) => {
     loading: false,
     users: [],
     user: {},
+    repos: [],
   };
 
   const [state, dispatch] = useReducer(GithubReducer, initialState);
@@ -45,12 +52,23 @@ const GithubState = (props) => {
     setLoading(false);
   };
 
+  const fetchUserInfo = async (username) => {
+    const res = await axios.get(`https://api.github.com/users/${username}`);
+    dispatch({ type: SET_USER, payload: res.data });
+  };
+
+  const fetchUserRepos = async (username) => {
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/repos`
+    );
+
+    dispatch({ type: SET_USER_REPOS, payload: res.data });
+  };
+
   const fetchGithubUserProfile = async (username) => {
     setLoading(true);
-
-    const res = await axios.get(`https://api.github.com/users/${username}`);
-
-    dispatch({ type: SET_USER, payload: res.data });
+    fetchUserInfo(username);
+    fetchUserRepos(username);
     setLoading(false);
   };
 
@@ -64,6 +82,7 @@ const GithubState = (props) => {
         users: state.users,
         loading: state.loading,
         user: state.user,
+        repos: state.repos,
       }}
     >
       {props.children}

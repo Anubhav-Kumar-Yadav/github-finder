@@ -12,9 +12,9 @@ const UserItem = ({ user }) => {
 
   return (
     <div className="card">
-      <img src={avatar_url} alt="User avatar" />
+      <img className="round block" src={avatar_url} alt="User avatar" />
       <h3>{login}</h3>
-      <button className="btn dark" onClick={onClick}>
+      <button className="btn block dark" onClick={onClick}>
         More
       </button>
     </div>
