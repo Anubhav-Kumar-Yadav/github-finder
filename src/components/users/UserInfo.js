@@ -18,6 +18,7 @@ const UserInfo = () => {
     public_gists,
     followers,
     following,
+    login,
   } = user;
 
   return (
@@ -31,7 +32,7 @@ const UserInfo = () => {
           <strong>
             Name <i className="fa-solid fa-file-signature" />:
           </strong>{" "}
-          {name}
+          {name ? name : login}
         </p>
 
         {/* Location */}

@@ -1,19 +1,22 @@
 import React, { useContext, useState } from "react";
 
 import GithubContext from "../../context/github/GithubContext";
+import AlertContext from "../../context/alert/AlertContext";
 
 const SearchUser = () => {
   const [username, setUsername] = useState("");
   const { searchUsersWithName, clearUsers, users } = useContext(GithubContext);
+  const { setAlert } = useContext(AlertContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    searchUsersWithName(username);
+    if (username.length === 0) setAlert("Please Enter Something...");
+    else searchUsersWithName(username);
     setUsername("");
   };
 
   const onChange = (e) => {
-    setUsername(e.target.value);
+    setUsername(e.target.value.trim());
   };
 
   return (
