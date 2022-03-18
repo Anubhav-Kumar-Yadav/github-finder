@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import GithubState from "./context/github/GithubState";
+import GithubLayout from "./components/layout/GithubLayout";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/Home";
 import User from "./components/users/User";
@@ -14,14 +14,11 @@ const App = () => {
     <>
       <Router>
         <Navbar />
-        <GithubState>
-          <Routes>
+        <Routes>
+          <Route element={<GithubLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/user/:username" element={<User />} />
-          </Routes>
-        </GithubState>
-
-        <Routes>
+          </Route>
           <Route path="/about" element={<About />} />
         </Routes>
       </Router>

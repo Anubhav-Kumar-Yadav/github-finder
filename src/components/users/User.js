@@ -10,10 +10,13 @@ const User = () => {
   const navigate = useNavigate();
   const { username } = useParams();
 
-  const { fetchGithubUserProfile, loading } = useContext(GithubContext);
+  const { fetchGithubUserProfile, clearUser, loading } = useContext(
+    GithubContext
+  );
 
   useEffect(() => {
     fetchGithubUserProfile(username);
+    return () => clearUser();
     // eslint-disable-next-line
   }, []);
 

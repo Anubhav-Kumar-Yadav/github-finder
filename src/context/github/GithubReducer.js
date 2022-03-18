@@ -4,6 +4,8 @@ import {
   SET_LOADING,
   SET_USER,
   SET_USER_REPOS,
+  CLEAR_USER,
+  CLEAR_USER_REPOS,
 } from "../types";
 
 const GithubReducer = (state, action) => {
@@ -24,8 +26,16 @@ const GithubReducer = (state, action) => {
       return { ...state, user: action.payload };
     }
 
+    case CLEAR_USER: {
+      return { ...state, user: {} };
+    }
+
     case SET_USER_REPOS: {
       return { ...state, repos: action.payload };
+    }
+
+    case CLEAR_USER_REPOS: {
+      return { ...state, repos: [] };
     }
 
     default:

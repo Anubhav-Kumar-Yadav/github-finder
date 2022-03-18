@@ -5,10 +5,13 @@ import UserItem from "./UserItem";
 import Spinner from "../layout/Spinner";
 
 const Users = () => {
-  const { getGithubUsers, users, loading } = useContext(GithubContext);
+  const { getGithubUsers, clearUsers, users, loading } = useContext(
+    GithubContext
+  );
 
   useEffect(() => {
     getGithubUsers();
+    return () => clearUsers();
     // eslint-disable-next-line
   }, []);
 

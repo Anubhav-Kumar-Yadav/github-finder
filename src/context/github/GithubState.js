@@ -6,7 +6,9 @@ import {
   CLEAR_USERS,
   SET_LOADING,
   SET_USER,
+  CLEAR_USER,
   SET_USER_REPOS,
+  CLEAR_USER_REPOS,
 } from "../types";
 
 import GithubReducer from "./GithubReducer";
@@ -39,6 +41,11 @@ const GithubState = (props) => {
 
   const clearUsers = () => {
     dispatch({ type: CLEAR_USERS });
+  };
+
+  const clearUser = () => {
+    dispatch({ type: CLEAR_USER });
+    dispatch({ type: CLEAR_USER_REPOS });
   };
 
   const searchUsersWithName = async (username) => {
@@ -77,6 +84,7 @@ const GithubState = (props) => {
       value={{
         getGithubUsers,
         clearUsers,
+        clearUser,
         searchUsersWithName,
         fetchGithubUserProfile,
         users: state.users,
