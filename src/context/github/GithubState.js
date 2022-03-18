@@ -59,23 +59,17 @@ const GithubState = (props) => {
     setLoading(false);
   };
 
-  const fetchUserInfo = async (username) => {
-    const res = await axios.get(`https://api.github.com/users/${username}`);
-    dispatch({ type: SET_USER, payload: res.data });
-  };
-
-  const fetchUserRepos = async (username) => {
-    const res = await axios.get(
+  const fetchGithubUserProfile = async (username) => {
+    setLoading(true);
+    const userInfo = await axios.get(
+      `https://api.github.com/users/${username}`
+    );
+    const userRepos = await axios.get(
       `https://api.github.com/users/${username}/repos`
     );
 
-    dispatch({ type: SET_USER_REPOS, payload: res.data });
-  };
-
-  const fetchGithubUserProfile = async (username) => {
-    setLoading(true);
-    fetchUserInfo(username);
-    fetchUserRepos(username);
+    dispatch({ type: SET_USER, payload: userInfo.data });
+    dispatch({ type: SET_USER_REPOS, payload: userRepos.data });
     setLoading(false);
   };
 
